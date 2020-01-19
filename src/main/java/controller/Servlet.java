@@ -86,13 +86,5 @@ public class Servlet extends HttpServlet {
         return user;
     }
 
-    public void askUserToCorrectInput(boolean isUserInputCorrect, HttpSession session, HttpServletResponse resp) throws IOException{
-        isUserInputCorrect = false;
-                session.setAttribute("invalidData", userValidator.getInvalidData());
-                session.removeAttribute("notUniqueData");
-                resp.sendRedirect("index.jsp");
-
-    }
-
 
 }
