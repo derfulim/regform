@@ -1,10 +1,12 @@
 package controller;
 
+import model.dao.UserDAO;
 import model.entity.NotUniqueFieldException;
 import model.entity.NoteBook;
 import model.entity.Role;
 import model.entity.User;
 import model.util.UserValidator;
+import org.mindrot.jbcrypt.BCrypt;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -69,8 +71,12 @@ public class Servlet extends HttpServlet {
 
         if(isUserInputCorrect){
             session.removeAttribute("notUniqueData");
-            req.setAttribute("usersList",noteBook.getUserList());
-        req.getRequestDispatcher("users.jsp").forward(req, resp);}
+            System.out.println("Trying to add user in DB");
+            UserDAO userDAO = new UserDAO();
+            userDAO.addUser(user);
+            req.setAttribute("usersList",  userDAO.getAllUsers());
+            req.getRequestDispatcher("users.jsp").forward(req, resp);
+        }
     }
 
     private User getUserFromRequest(HttpServletRequest request) {
@@ -83,6 +89,10 @@ public class Servlet extends HttpServlet {
         user.setSurnameEng(request.getParameter("surNameEng"));
         user.setEmail(request.getParameter("email"));
         user.setPassword(request.getParameter("password"));
+
+        String hash = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
+        System.out.println(hash);
+        System.out.println("Hash length is " + hash.length());
         return user;
     }
 

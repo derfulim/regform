@@ -6,10 +6,7 @@
 <h2>Registration form</h2>
 
 <form method="post" action="regform">
-
     <%--TODO fix when input invalid login after not unique field--%>
-
-
     <p>
         <c:if test="${not empty sessionScope.invalidData.login }">
             <c:out value="Поле не валідне ${sessionScope.invalidData.login}"/>
@@ -93,6 +90,22 @@
 
     <input class="button" type="submit" value="Submit">
 </form>
+
+<b>
+    <form action="signin">
+        <p><b>Login</b><br>
+            <input required type="text" size="40" name="login" id="oldlogin">
+        </p>
+
+        <p><b>Password</b><br>
+            <input required type="password" size="40" name="password" id="oldpassword">
+        </p>
+
+        <input class="button" type="submit" value="Submit">
+
+    </form>
+
+</b>
 
 
 </body>

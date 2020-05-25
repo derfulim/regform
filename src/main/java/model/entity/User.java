@@ -10,8 +10,16 @@ package model.entity;
         private String surnameEng;
         private String email;
         private String password;
+        private String hash;
 
-        public User() {
+        public User() {}
+
+        public String getHash() {
+            return hash;
+        }
+
+        public void setHash(String hash) {
+            this.hash = hash;
         }
 
         public int getId() {
