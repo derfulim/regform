@@ -96,5 +96,10 @@ public class Servlet extends HttpServlet {
         return user;
     }
 
+    //todo add login
+    //todo use command pattern
+
+
+
 
 }
